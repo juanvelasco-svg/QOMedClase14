@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alcanos y Sustitución por Radicales | Química Orgánica</title>
+<style>
+    :root {
+        --QOMed-gold: #D4AF37;
+        --QOMed-dark: #1a1a2e;
+        --QOMed-blue: #16213e;
+        --QOMed-light: #0f3460;
+        --accent: #e94560;
+        --text: #2c3e50;
+        --white: #ffffff;
+        --sand: #f4e9c1;
+        --shadow: rgba(0, 0, 0, 0.15);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ===== SANGRÍA DE VIÑETAS Y LISTAS ===== */
+    ul:not(.map-tree), ol {
+        padding-left: 2.4rem;
+        margin: 0.5rem 0 1rem;
+    }
+    ul:not(.map-tree) { list-style: none; }
+    ul:not(.map-tree) li, ol li { margin: 0.45rem 0; }
+
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    header { background: linear-gradient(135deg, var(--QOMed-dark) 0%, var(--QOMed-blue) 100%); color: var(--white); padding: 2rem; text-align: center; box-shadow: 0 6px 20px var(--shadow); position: relative; overflow: hidden; border-bottom: 5px solid var(--QOMed-gold); }
+    .logo-container { display: flex; align-items: center; justify-content: center; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .logo-QOMed { width: 120px; height: auto; background: var(--white); border-radius: 50%; padding: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; text-shadow: 3px 3px 6px rgba(0,0,0,0.3); color: var(--QOMed-gold); }
+    .subtitle { font-size: 1.2rem; opacity: 0.95; font-weight: 300; }
+    .nav-container { background: var(--QOMed-blue); padding: 1rem; position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 12px var(--shadow); }
+    .nav-buttons { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.8rem; max-width: 1400px; margin: 0 auto; }
+    .nav-btn { background: var(--white); color: var(--QOMed-dark); border: none; padding: 0.8rem 1.5rem; border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 3px 8px rgba(0,0,0,0.2); }
+    .nav-btn:hover, .nav-btn.active { background: var(--QOMed-gold); color: var(--QOMed-dark); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(212,175,55,0.4); }
+    .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+    .section { display: none; animation: fadeIn 0.5s ease; }
+    .section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .card { background: var(--white); border-radius: 16px; padding: 2rem; margin-bottom: 2rem; box-shadow: 0 8px 24px var(--shadow); border-left: 6px solid var(--QOMed-gold); transition: transform 0.3s ease; }
+    .card:hover { transform: translateY(-5px); }
+    h2 { color: var(--QOMed-blue); margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 3px solid var(--QOMed-gold); display: flex; align-items: center; gap: 0.8rem; font-size: 2rem; }
+    h3 { color: var(--QOMed-light); margin: 1.5rem 0 1rem; font-size: 1.5rem; }
+    .molecule-img { max-width: 100%; height: auto; border-radius: 12px; margin: 1rem 0; box-shadow: 0 4px 12px var(--shadow); }
+    .img-container { text-align: center; margin: 2rem 0; }
+    .calculator { background: linear-gradient(135deg, #fff9f5 0%, #fff0e8 100%); border: 3px solid var(--QOMed-gold); border-radius: 16px; padding: 2rem; margin: 2rem 0; }
+    .calc-title { color: var(--QOMed-blue); font-size: 1.6rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; }
+    .calc-input-group { margin: 1rem 0; }
+    .calc-input-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--QOMed-dark); }
+    .calc-input-group input, .calc-input-group select { width: 100%; padding: 0.8rem; border: 2px solid var(--sand); border-radius: 8px; font-size: 1rem; transition: border-color 0.3s; }
+    .calc-input-group input:focus, .calc-input-group select:focus { outline: none; border-color: var(--QOMed-gold); }
+    .calc-button { background: var(--QOMed-blue); color: var(--white); border: none; padding: 1rem 2rem; border-radius: 30px; font-size: 1.1rem; font-weight: 600; cursor: pointer; margin-top: 1rem; transition: all 0.3s ease; box-shadow: 0 4px 12px var(--shadow); }
+    .calc-button:hover { background: var(--QOMed-gold); color: var(--QOMed-dark); transform: translateY(-2px); }
+    .calc-result { background: var(--white); border-left: 5px solid var(--accent); padding: 1.5rem; margin-top: 1.5rem; border-radius: 8px; font-size: 1.1rem; display: none; }
+    .calc-result.show { display: block; animation: slideIn 0.5s ease; }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+    table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px var(--shadow); }
+    th { background: linear-gradient(135deg, var(--QOMed-blue) 0%, var(--QOMed-light) 100%); color: var(--white); padding: 1.2rem; text-align: left; font-weight: 600; }
+    td { padding: 1rem 1.2rem; border-bottom: 1px solid #eee; transition: background 0.3s; }
+    tr:hover td { background: #f8fff0; }
+    .info-box { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); border-left: 5px solid #2196f3; padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 12px 12px 0; }
+    .tip-box { background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%); border-left: 5px solid #ffc107; padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 12px 12px 0; }
+    .bio-box { background: linear-gradient(135deg, #d1ecf1 0%, #a8dadc 100%); border-left: 5px solid #17a2b8; padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 12px 12px 0; }
+    .pharma-box { background: linear-gradient(135deg, #f8d7da 0%, #f1aeb5 100%); border-left: 5px solid #dc3545; padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 12px 12px 0; }
+    .problem-box { background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); border-left: 5px solid #28a745; padding: 1.5rem; margin: 1.5rem 0; border-radius: 0 12px 12px 0; }
+    details.solution { margin-top: 1rem; background: #f8f9fa; border: 2px solid var(--QOMed-light); border-radius: 10px; padding: 0.8rem 1.2rem; }
+    details.solution summary { cursor: pointer; font-weight: 700; color: var(--QOMed-light); }
+    details.solution[open] summary { margin-bottom: 0.8rem; border-bottom: 1px dashed var(--QOMed-light); padding-bottom: .4rem; }
+    .mnemonic-card { background: linear-gradient(135deg, #fff5f5 0%, #ffe0e0 100%); border: 3px solid var(--accent); border-radius: 12px; padding: 1.5rem; margin: 1rem 0; position: relative; overflow: hidden; }
+    .mnemonic-title { color: var(--accent); font-weight: 700; margin-bottom: 0.8rem; font-size: 1.2rem; }
+    .glossary-term { background: var(--white); border: 2px solid var(--QOMed-gold); border-radius: 8px; padding: 1rem; margin: 0.8rem 0; cursor: pointer; transition: all 0.3s; }
+    .glossary-term:hover { background: #fff9e6; transform: translateX(5px); }
+    .glossary-definition { display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--QOMed-gold); }
+    .glossary-definition.show { display: block; animation: fadeIn 0.3s ease; }
+    .error-card { background: linear-gradient(135deg, #ffe6e6 0%, #ffb3b3 100%); border-left: 5px solid #dc3545; padding: 1.5rem; margin: 1rem 0; border-radius: 0 12px 12px 0; }
+    .error-title { color: #dc3545; font-weight: 700; margin-bottom: 0.5rem; }
+    .correction { background: #d4edda; border-left: 3px solid #28a745; padding: 1rem; margin-top: 1rem; border-radius: 0 8px 8px 0; }
+    .quiz-container { background: linear-gradient(135deg, var(--QOMed-blue) 0%, var(--QOMed-light) 100%); color: var(--white); border-radius: 16px; padding: 2rem; margin: 2rem 0; }
+    .quiz-question { font-size: 1.4rem; margin-bottom: 1.5rem; font-weight: 600; }
+    .quiz-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+    .quiz-option { background: var(--white); color: var(--text); border: 3px solid transparent; padding: 1.2rem; border-radius: 10px; cursor: pointer; transition: all 0.3s ease; font-weight: 500; }
+    .quiz-option:hover:not(:disabled) { border-color: var(--QOMed-gold); transform: translateY(-3px); }
+    .quiz-option:disabled { cursor: not-allowed; opacity: 0.95; }
+    .quiz-option.correct { background: #4caf50; color: white; border-color: #2e7d32; }
+    .quiz-option.incorrect { background: #f44336; color: white; border-color: #c62828; }
+    .quiz-progress { max-width: 720px; margin: 0 auto 1rem; }
+    .quiz-progress-bar-bg { height: 10px; background: #e0e0e0; border-radius: 5px; overflow: hidden; }
+    .quiz-progress-bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--QOMed-gold), var(--accent)); transition: width 0.4s; }
+    .quiz-stats { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; margin: 1rem 0; }
+    .quiz-stat { padding: 0.6rem 1.2rem; border-radius: 20px; font-weight: 700; color: #fff; font-size: 0.95rem; background: var(--QOMed-light); }
+    .footer { background: var(--QOMed-dark); color: var(--white); text-align: center; padding: 2.5rem; margin-top: 3rem; border-top: 5px solid var(--QOMed-gold); }
+    .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1.5rem 0; border-radius: 12px; box-shadow: 0 4px 12px var(--shadow); }
+    .table-responsive table { min-width: 600px; width: 100%; margin: 0; }
+    .tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .tab { background: var(--sand); border: none; padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+    .tab.active { background: var(--QOMed-gold); color: var(--QOMed-dark); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.5s ease; }
+    .fc-stats { display: flex; gap: 0.8rem; flex-wrap: wrap; justify-content: center; margin: 1rem 0; }
+    .fc-stat { padding: 0.6rem 1.2rem; border-radius: 20px; font-weight: 700; color: #fff; font-size: 0.95rem; }
+    .fc-stat.good { background: #28a745; } .fc-stat.bad { background: #dc3545; } .fc-stat.pending { background: #6c757d; } .fc-stat.total { background: var(--QOMed-light); }
+    .fc-progress { height: 10px; background: #e0e0e0; border-radius: 5px; overflow: hidden; max-width: 720px; margin: 0 auto 1.5rem; }
+    .fc-progress-bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--QOMed-gold), var(--accent)); transition: width 0.4s; }
+    .flashcard-scene { perspective: 1400px; max-width: 720px; height: 320px; margin: 0 auto 1.5rem; }
+    .flashcard { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform 0.6s; cursor: pointer; }
+    .flashcard.flipped { transform: rotateY(180deg); }
+    .fc-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 16px; padding: 2rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: auto; box-shadow: 0 8px 24px var(--shadow); font-size: 1.15rem; }
+    .fc-front { background: linear-gradient(135deg, var(--QOMed-blue), var(--QOMed-light)); color: #fff; border: 3px solid var(--QOMed-gold); }
+    .fc-back { background: linear-gradient(135deg, #fff9e6, var(--sand)); color: var(--text); border: 3px solid var(--QOMed-gold); transform: rotateY(180deg); }
+    .fc-label { font-size: 0.85rem; letter-spacing: 2px; font-weight: 800; opacity: 0.8; margin-bottom: 1rem; }
+    .fc-hint { margin-top: 1rem; font-size: 0.85rem; opacity: 0.7; font-style: italic; }
+    .fc-controls { display: flex; gap: 1rem; justify-content: center; margin-bottom: 1rem; flex-wrap: wrap; }
+    .fc-btn { border: none; padding: 0.9rem 2rem; border-radius: 30px; font-size: 1.05rem; font-weight: 700; cursor: pointer; transition: all 0.3s; color: #fff; }
+    .fc-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .fc-btn.good { background: #28a745; } .fc-btn.bad { background: #dc3545; }
+    .fc-btn:not(:disabled):hover { transform: translateY(-3px); }
+    .fc-link { background: none; border: none; color: #6c757d; text-decoration: underline; cursor: pointer; font-size: 0.85rem; margin-top: 1rem; }
+
+    /* ===== MAPA CONCEPTUAL ===== */
+    .map-container { overflow-x: auto; padding: 1rem 0; }
+    .map-tree, .map-tree ul { list-style: none; margin: 0; padding-left: 0; }
+    .map-tree ul { display: none; padding-left: 1.6rem; margin: 0.6rem 0 0; border-left: 3px solid var(--QOMed-gold); }
+    .map-tree li.open > ul { display: block; animation: fadeIn 0.4s ease; }
+    .map-tree li { margin: 0.4rem 0; }
+    .map-node { display: inline-block; background: var(--QOMed-blue); color: #fff; padding: 0.6rem 1.1rem; border-radius: 10px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+    .map-node:hover { background: var(--QOMed-gold); color: var(--QOMed-dark); transform: translateX(4px); }
+    .map-node.root { background: var(--accent); font-size: 1.15rem; }
+    .map-node.branch { background: var(--QOMed-light); }
+    .map-leaf { display: inline-block; background: var(--sand); color: var(--text); padding: 0.45rem 0.9rem; border-radius: 8px; font-size: 0.95rem; border: 2px solid var(--QOMed-gold); }
+    li.has-children > .map-node::before { content: '▶ '; font-size: 0.8em; }
+    li.has-children.open > .map-node::before { content: '▼ '; font-size: 0.8em; }
+
+    @media (max-width: 768px) {
+        h1 { font-size: 1.8rem; } h2 { font-size: 1.5rem; } h3 { font-size: 1.2rem; }
+        .logo-container { flex-direction: column; gap: 1rem; } .logo-QOMed { width: 80px; }
+        .container { padding: 1rem; } .card { padding: 1.5rem; }
+        .nav-buttons { gap: 0.5rem; } .nav-btn { padding: 0.6rem 1rem; font-size: 0.85rem; }
+        .quiz-options { grid-template-columns: 1fr; }
+        .tabs { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 0.5rem; }
+        .tab { flex-shrink: 0; padding: 0.6rem 1rem; font-size: 0.9rem; }
+        .flashcard-scene { height: 360px; } .fc-face { font-size: 1rem; padding: 1rem; }
+    }
+    @media (max-width: 480px) {
+        h1 { font-size: 1.4rem; } .subtitle { font-size: 0.9rem; } header { padding: 1rem; }
+        .card { padding: 1rem; } .nav-btn { padding: 0.5rem 0.7rem; font-size: 0.8rem; }
+    }
+</style>
+</head>
+<body>
+<header>
+    <div class="logo-container">
+        <img src="Logo-QOMed.png" alt="Logo QOMed" class="logo-QOMed">
+        <div>
+            <h1>Química Orgánica</h1>
+            <p class="subtitle">Especializada para alumnos de Medicina</p>
+            <p class="subtitle">Capítulo 14: Alcanos y Sustitución por Radicales</p>
+        </div>
+    </div>
+</header>
+
+<nav class="nav-container">
+    <div class="nav-buttons">
+        <button class="nav-btn active" onclick="showSection('inicio', this)">🏠 Inicio</button>
+        <button class="nav-btn" onclick="showSection('conceptos', this)">📚 Conceptos</button>
+        <button class="nav-btn" onclick="showSection('mapa', this)">🗺️ Mapa Conceptual</button>
+        <button class="nav-btn" onclick="showSection('flashcards', this)">🃏 Flashcards</button>
+        <button class="nav-btn" onclick="showSection('calculadoras', this)">🧮 Herramientas</button>
+        <button class="nav-btn" onclick="showSection('aplicaciones', this)">🏥 Aplicaciones</button>
+        <button class="nav-btn" onclick="showSection('mnemotecnias', this)">🧠 Mnemotecnias</button>
+        <button class="nav-btn" onclick="showSection('glosario', this)">📖 Glosario</button>
+        <button class="nav-btn" onclick="showSection('errores', this)">⚠️ Errores Comunes</button>
+        <button class="nav-btn" onclick="showSection('bibliografia', this)">📚 Bibliografía</button>
+        <button class="nav-btn" onclick="showSection('quiz', this)">🎯 Quiz</button>
+    </div>
+</nav>
+
+<div class="container">
+
+<!-- ============ INICIO ============ -->
+<section id="inicio" class="section active">
+    <div class="card">
+        <h2>🎯 Objetivos de la Sesión</h2>
+        <div class="info-box">
+            <ul style="font-size: 1.1rem; line-height: 2;">
+                <li>✓ Identificar las principales reacciones de los alcanos.</li>
+                <li>✓ Identificar el orden de la estabilidad relativa de los radicales.</li>
+                <li>✓ Identificar el mecanismo de sustitución por radicales en los alcanos.</li>
+                <li>✓ Determinar y calcular los productos principales en un proceso de sustitución por radicales.</li>
+            </ul>
+        </div>
+        <h3>🩺 Importancia para la Medicina</h3>
+        <div class="bio-box">
+            <div><strong>¿Por qué un futuro médico debe dominar la química de radicales libres?</strong>
+                <ul style="font-size: 1rem; margin-top: 1rem;">
+                    <li>• El <strong>estrés oxidativo</strong> (daño por radicales libres) está implicado en el envejecimiento, cáncer, aterosclerosis y enfermedades neurodegenerativas.</li>
+                    <li>• Los <strong>antioxidantes</strong> (Vitamina C, E, glutatión) actúan neutralizando radicales libres mediante mecanismos de donación de electrones/hidrógeno.</li>
+                    <li>• El metabolismo de fármacos en el hígado (<strong>Citocromo P450</strong>) involucra intermediarios radicalarios en reacciones de oxidación de fase I.</li>
+                    <li>• Los <strong>anestésicos halogenados</strong> (ej. halotano) pueden sufrir metabolismo reductivo generando radicales que causan toxicidad hepática (hepatitis por halotano).</li>
+                    <li>• La <strong>peroxidación lipídica</strong> de las membranas celulares es un proceso en cadena iniciado por radicales que compromete la integridad celular.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="tip-box"><strong>📌 Ruta de estudio sugerida:</strong> Conceptos → Mapa conceptual → Flashcards → Herramientas (Calculadora de abundancia) → Aplicaciones → Quiz (10 preguntas aleatorias de una base de 30; cada ciclo recarga preguntas nuevas).</div>
+        <div class="pharma-box"><strong>Regla de oro del capítulo:</strong> La sustitución radicalica <strong>NO es iónica</strong> (ni nucleofílica ni electrofílica). Ocurre por <strong>ruptura homolítica</strong>. El <strong>Bromo</strong> es altamente selectivo (favorece el radical más estable), mientras que el <strong>Cloro</strong> es poco selectivo y más reactivo.</div>
+    </div>
+</section>
+
+<!-- ============ CONCEPTOS ============ -->
+<section id="conceptos" class="section">
+    <div class="card">
+        <h2>📚 Conceptos</h2>
+        <div id="conceptos-tabs" class="tab-group">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('conceptos-tabs','sub-radicales', this)">⚛️ Radicales Libres</button>
+                <button class="tab" onclick="showTab('conceptos-tabs','sub-estabilidad', this)">📊 Estabilidad Relativa</button>
+                <button class="tab" onclick="showTab('conceptos-tabs','sub-mecanismo', this)">🔄 Mecanismo de Reacción</button>
+                <button class="tab" onclick="showTab('conceptos-tabs','sub-halogenacion', this)">🧪 Halogenación</button>
+                <button class="tab" onclick="showTab('conceptos-tabs','sub-calculo', this)">🧮 Cálculo de Abundancia</button>
+            </div>
+
+            <div id="sub-radicales" class="tab-content active">
+                <h3>⚛️ Definición y Características</h3>
+                <div class="info-box">Un <strong>radical libre</strong> es una especie química con <strong>electrones desapareados</strong>. Son <strong>extremadamente reactivos</strong> y presentan muy baja selectividad debido a su alta reactividad.</div>
+                <div class="tip-box">
+                    <strong>Características estructurales:</strong><br>
+                    • El átomo de carbono deficiente en electrones presenta hibridación <strong>sp²</strong>.<br>
+                    • La geometría es <strong>plana</strong> (trigonal plana).<br>
+                    • A diferencia de los carbocationes (orbital p vacío), en los radicales el orbital p no está vacío, sino que <strong>contiene al electrón desapareado</strong>.<br>
+                    • Se generan por <strong>ruptura homolítica</strong> de un enlace covalente.
+                </div>
+            </div>
+
+            <div id="sub-estabilidad" class="tab-content">
+                <h3>📊 Estabilidad Relativa de los Radicales</h3>
+                <div class="info-box">La estabilidad de los radicales de carbono aumenta con el número de grupos alquilo unidos al carbono radicalario (por hiperconjugación y efecto inductivo donador), y se ve enormemente favorecida por la resonancia.</div>
+                <div class="table-responsive">
+                    <table>
+                        <tr><th>Tipo de Radical</th><th>Ejemplo Estructural</th><th>Estabilidad</th></tr>
+                        <tr><td><strong>Bencilo</strong></td><td>C₆H₅-CH₂•</td><td>Mayor (Resonancia con anillo aromático)</td></tr>
+                        <tr><td><strong>Ailo</strong></td><td>CH₂=CH-CH₂•</td><td>Muy alta (Resonancia con doble enlace)</td></tr>
+                        <tr><td><strong>Terciario (3°)</strong></td><td>(CH₃)₃C•</td><td>Alta</td></tr>
+                        <tr><td><strong>Secundario (2°)</strong></td><td>CH₃-CH•-CH₃</td><td>Moderada</td></tr>
+                        <tr><td><strong>Primario (1°)</strong></td><td>CH₃-CH₂•</td><td>Baja</td></tr>
+                        <tr><td><strong>Metilo</strong></td><td>CH₃•</td><td>Menor</td></tr>
+                    </table>
+                </div>
+                <div class="bio-box"><strong>Orden de aumento de estabilidad:</strong> Metilo < 1° < 2° < 3° < Alilo < Bencilo</div>
+            </div>
+
+            <div id="sub-mecanismo" class="tab-content">
+                <h3>🔄 Mecanismo de Sustitución Radicalica</h3>
+                <div class="info-box">Es un mecanismo de reacción en cadena que ocurre en tres etapas fundamentales:</div>
+                <div class="tip-box">
+                    <strong>1. Iniciación:</strong> Se generan los primeros radicales (ej. Cl•) mediante <strong>ruptura homolítica</strong> que requiere una fuente de energía externa (<strong>luz [hv] o calor [Δ]</strong>). La concentración de radicales es muy baja.
+                </div>
+                <div class="bio-box">
+                    <strong>2. Propagación:</strong> Se propaga la reacción. Se consumen reactivos y se obtienen productos, pero la <strong>concentración de radicales libres permanece constante</strong> (se consume uno y se genera otro). Esto se denomina <strong>"estado estacionario"</strong>.<br>
+                    <em>Ejemplo (Cloración del metano):</em><br>
+                    • Paso 1: Cl• + CH₄ → HCl + CH₃•<br>
+                    • Paso 2: CH₃• + Cl₂ → CH₃Cl + Cl•
+                </div>
+                <div class="pharma-box">
+                    <strong>3. Terminación:</strong> Termina la propagación por la <strong>desaparición de los radicales</strong> mediante acoplamiento (unión de dos radicales).<br>
+                    <em>Ejemplos de terminación en cloración del metano:</em><br>
+                    • Cl• + Cl• → Cl₂<br>
+                    • CH₃• + Cl• → CH₃Cl<br>
+                    • CH₃• + CH₃• → CH₃-CH₃ (Etano, producto colateral)
+                </div>
+            </div>
+
+            <div id="sub-halogenacion" class="tab-content">
+                <h3>🧪 Halogenación de Alcanos</h3>
+                <div class="info-box">La reactividad del halógeno disminuye hacia abajo en el grupo de la tabla periódica. La entalpía (ΔH) de reacción varía drásticamente:</div>
+                <div class="table-responsive">
+                    <table>
+                        <tr><th>Halógeno</th><th>ΔH de Reacción</th><th>Características</th></tr>
+                        <tr><td><strong>Flúor (F₂)</strong></td><td>-103 kcal/mol</td><td>Altamente exotérmica (¡explosiva!). Sin interés práctico.</td></tr>
+                        <tr><td><strong>Cloro (Cl₂)</strong></td><td>-25 kcal/mol</td><td>Más reactivo, <strong>menos selectivo</strong>. Ocurre a temperatura ambiente.</td></tr>
+                        <tr><td><strong>Bromo (Br₂)</strong></td><td>-7 kcal/mol</td><td>Menos reactivo, <strong>más selectivo</strong>. Puede requerir hasta 100°C.</td></tr>
+                        <tr><td><strong>Yodo (I₂)</strong></td><td>+13 kcal/mol</td><td>Endotérmica. No ocurre o lo hace muy lentamente.</td></tr>
+                    </table>
+                </div>
+                <div class="tip-box"><strong>Nota:</strong> Si la cantidad de halógeno es superior a la estequiométrica, la halogenación puede continuar, obteniendo una mezcla de productos polihalogenados (ej. CH₂Cl₂, CHCl₃, CCl₄ a partir de metano).</div>
+            </div>
+
+            <div id="sub-calculo" class="tab-content">
+                <h3>🧮 Cálculo de Abundancia Relativa de Productos</h3>
+                <div class="info-box">Cuando se pueden producir varios productos, la abundancia relativa no depende solo del número de hidrógenos, sino de la combinación del <strong>número de hidrógenos</strong> y la <strong>reactividad relativa</strong> del radical formado.</div>
+                <div class="problem-box">
+                    <strong>Fórmula:</strong><br>
+                    Abundancia Relativa de X = (N° de H para radical X × Reactividad relativa de X) / Suma total de todos los valores × 100
+                </div>
+                <div class="table-responsive">
+                    <table>
+                        <tr><th>Tipo de Radical</th><th>Reactividad Relativa (Cloración)</th><th>Reactividad Relativa (Bromación)</th></tr>
+                        <tr><td>Terciario (3°)</td><td>5.0</td><td>1600</td></tr>
+                        <tr><td>Secundario (2°)</td><td>3.8</td><td>82.0</td></tr>
+                        <tr><td>Primario (1°)</td><td>1.0</td><td>1.0</td></tr>
+                    </table>
+                </div>
+                <div class="bio-box">
+                    <strong>Ejemplo: Cloración del propano</strong><br>
+                    El propano tiene 6 H primarios y 2 H secundarios.<br>
+                    • Valor para 1°: 6 H × 1.0 = 6.0<br>
+                    • Valor para 2°: 2 H × 3.8 = 7.6<br>
+                    • Total = 13.6<br>
+                    • % Producto 1° (1-cloropropano) = (6.0 / 13.6) × 100 = <strong>44.1%</strong><br>
+                    • % Producto 2° (2-cloropropano / cloruro de isopropilo) = (7.6 / 13.6) × 100 = <strong>55.9%</strong><br>
+                    <em>¡El cloruro de isopropilo es el producto principal a pesar de haber menos H secundarios, porque el radical secundario es más estable!</em>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ MAPA ============ -->
+<section id="mapa" class="section">
+    <div class="card">
+        <h2>🗺️ Mapa Conceptual Interactivo</h2>
+        <p style="margin-bottom:1rem;">Haz <strong>clic en cada nodo</strong> para desplegar u ocultar sus ramas.</p>
+        <div class="map-container">
+            <ul class="map-tree">
+                <li class="has-children">
+                    <div class="map-node root" onclick="toggleMap(this)">🧪 Alcanos y Sustitución por Radicales (Capítulo 14)</div>
+                    <ul>
+                        <li class="has-children"><div class="map-node branch" onclick="toggleMap(this)">⚛️ Radicales Libres</div>
+                            <ul>
+                                <li><span class="map-leaf">Especie con electrones desapareados</span></li>
+                                <li><span class="map-leaf">Extremadamente reactivos, baja selectividad</span></li>
+                                <li><span class="map-leaf">Hibridación sp², geometría plana</span></li>
+                                <li><span class="map-leaf">Electrón desapareado en orbital p</span></li>
+                            </ul>
+                        </li>
+                        <li class="has-children"><div class="map-node branch" onclick="toggleMap(this)">📊 Estabilidad Relativa</div>
+                            <ul>
+                                <li><span class="map-leaf">Bencilo > Alilo > 3° > 2° > 1° > Metilo</span></li>
+                                <li><span class="map-leaf">Estabilizados por hiperconjugación y resonancia</span></li>
+                            </ul>
+                        </li>
+                        <li class="has-children"><div class="map-node branch" onclick="toggleMap(this)">🔄 Mecanismo en Cadena</div>
+                            <ul>
+                                <li><span class="map-leaf">Iniciación: Ruptura homolítica (luz/calor), genera radicales</span></li>
+                                <li><span class="map-leaf">Propagación: Estado estacionario (concentración de radicales constante)</span></li>
+                                <li><span class="map-leaf">Terminación: Acoplamiento de radicales (ej. formación de etano)</span></li>
+                            </ul>
+                        </li>
+                        <li class="has-children"><div class="map-node branch" onclick="toggleMap(this)">🧪 Halogenación</div>
+                            <ul>
+                                <li><span class="map-leaf">F₂: Explosiva, sin interés práctico</span></li>
+                                <li><span class="map-leaf">Cl₂: Reactivo, poco selectivo (ambiente)</span></li>
+                                <li><span class="map-leaf">Br₂: Menos reactivo, muy selectivo (requiere calor)</span></li>
+                                <li><span class="map-leaf">I₂: Endotérmica, no ocurre</span></li>
+                            </ul>
+                        </li>
+                        <li class="has-children"><div class="map-node branch" onclick="toggleMap(this)">🧮 Cálculo de Productos</div>
+                            <ul>
+                                <li><span class="map-leaf">Abundancia = (N° de H × Reactividad relativa) / Total</span></li>
+                                <li><span class="map-leaf">Cloración: 3°(5.0), 2°(3.8), 1°(1.0)</span></li>
+                                <li><span class="map-leaf">Bromación: 3°(1600), 2°(82.0), 1°(1.0)</span></li>
+                            </ul>
+                        </li>
+                        <li class="has-children"><div class="map-node branch" onclick="toggleMap(this)">🏥 Aplicaciones Médicas</div>
+                            <ul>
+                                <li><span class="map-leaf">Estrés oxidativo y daño celular</span></li>
+                                <li><span class="map-leaf">Acción de antioxidantes (Vit C, E)</span></li>
+                                <li><span class="map-leaf">Metabolismo de fármacos (Citocromo P450)</span></li>
+                                <li><span class="map-leaf">Peroxidación lipídica de membranas</span></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FLASHCARDS ============ -->
+<section id="flashcards" class="section">
+    <div class="card">
+        <h2>🃏 Flashcards de Estudio</h2>
+        <p>Haz <strong>clic en la tarjeta</strong> para voltearla y ver la respuesta. Luego califícate con honestidad.</p>
+        <div class="fc-stats">
+            <span class="fc-stat good">✅ Buenas: <span id="fc-good">0</span></span>
+            <span class="fc-stat bad">❌ Malas: <span id="fc-bad">0</span></span>
+            <span class="fc-stat pending">⏳ Pendientes: <span id="fc-left">0</span></span>
+            <span class="fc-stat total">📈 Historial: <span id="fc-hist">0 ✓ / 0 ✗</span></span>
+        </div>
+        <div class="fc-progress"><div class="fc-progress-bar" id="fc-bar"></div></div>
+        <div class="flashcard-scene" id="fc-scene">
+            <div class="flashcard" id="fc-card" onclick="flipCard()">
+                <div class="fc-face fc-front"><div class="fc-label">PREGUNTA</div><div id="fc-question"></div><span class="fc-hint">Clic para voltear ✨</span></div>
+                <div class="fc-face fc-back"><div class="fc-label">RESPUESTA</div><div id="fc-answer"></div></div>
+            </div>
+        </div>
+        <div class="fc-controls" id="fc-controls">
+            <button class="fc-btn good" id="btn-fc-good" onclick="gradeCard(true)" disabled>✅ La sabía</button>
+            <button class="fc-btn bad" id="btn-fc-bad" onclick="gradeCard(false)" disabled>❌ No la sabía</button>
+        </div>
+        <div id="fc-summary" class="calc-result" style="max-width:720px;margin:1rem auto;"></div>
+        <div style="text-align:center;">
+            <button class="calc-button" onclick="resetFlashcards()">🔄 Reiniciar Flashcards</button><br>
+            <button class="fc-link" onclick="borrarHistorial()">Borrar historial acumulado</button>
+        </div>
+    </div>
+</section>
+
+<!-- ============ HERRAMIENTAS ============ -->
+<section id="calculadoras" class="section">
+    <div class="card">
+        <h2>🧮 Herramientas Interactivas</h2>
+        <div id="herramientas-tabs" class="tab-group">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('herramientas-tabs','calc-abundancia', this)">🧮 Calculadora de Abundancia</button>
+                <button class="tab" onclick="showTab('herramientas-tabs','calc-clasificador', this)">🧪 Clasificador de Halogenación</button>
+            </div>
+
+            <div id="calc-abundancia" class="tab-content active">
+                <div class="calculator">
+                    <div class="calc-title">🧮 Calculadora de Abundancia Relativa de Productos</div>
+                    <div class="calc-input-group"><label>Tipo de Halogenación:</label>
+                        <select id="calc-tipo-hal">
+                            <option value="cloro">Cloración (Reactividades: 3°=5.0, 2°=3.8, 1°=1.0)</option>
+                            <option value="bromo">Bromación (Reactividades: 3°=1600, 2°=82.0, 1°=1.0)</option>
+                        </select>
+                    </div>
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap:1rem;">
+                        <div class="calc-input-group"><label>N° de H Primarios (1°):</label><input type="number" id="calc-h1" value="6" min="0"></div>
+                        <div class="calc-input-group"><label>N° de H Secundarios (2°):</label><input type="number" id="calc-h2" value="2" min="0"></div>
+                        <div class="calc-input-group"><label>N° de H Terciarios (3°):</label><input type="number" id="calc-h3" value="0" min="0"></div>
+                    </div>
+                    <button class="calc-button" onclick="calcularAbundancia()">Calcular Porcentajes</button>
+                    <div id="abundancia-resultado" class="calc-result"></div>
+                    <div class="tip-box" style="margin-top:2rem;"><strong>Ejemplo precargado:</strong> Propano (6 H primarios, 2 H secundarios). Observa cómo el producto secundario domina en bromación debido a la altísima selectividad (82.0 vs 1.0).</div>
+                </div>
+            </div>
+
+            <div id="calc-clasificador" class="tab-content">
+                <div class="calculator">
+                    <div class="calc-title">🧪 Clasificador de Viabilidad de Halogenación</div>
+                    <div class="calc-input-group"><label>Selecciona el halógeno:</label>
+                        <select id="halogeno-select">
+                            <option value="F">Flúor (F₂)</option>
+                            <option value="Cl">Cloro (Cl₂)</option>
+                            <option value="Br">Bromo (Br₂)</option>
+                            <option value="I">Yodo (I₂)</option>
+                        </select>
+                    </div>
+                    <button class="calc-button" onclick="clasificarHalogeno()">Evaluar Reacción</button>
+                    <div id="halogeno-resultado" class="calc-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ APLICACIONES ============ -->
+<section id="aplicaciones" class="section">
+    <div class="card">
+        <h2>🏥 Aplicaciones Profesionales</h2>
+        <div id="aplicaciones-tabs" class="tab-group">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('aplicaciones-tabs','aplic-medicina', this)">🩺 Medicina Clínica</button>
+                <button class="tab" onclick="showTab('aplicaciones-tabs','aplic-farma', this)">💊 Farmacología</button>
+                <button class="tab" onclick="showTab('aplicaciones-tabs','aplic-bioq', this)">🧬 Bioquímica</button>
+            </div>
+
+            <div id="aplic-medicina" class="tab-content active">
+                <div class="bio-box"><strong>Enfoque clínico:</strong> El daño por radicales libres es un denominador común en múltiples patologías.</div>
+                <div class="problem-box"><strong>📋 Problema 1 — Estrés Oxidativo:</strong> ¿Cómo dañan los radicales libres (ej. radical hidroxilo •OH) a las células y cómo actúan los antioxidantes?</div>
+                <details class="solution"><summary>🔍 Ver solución</summary>
+                    <p>Los radicales libres roban electrones de lípidos de membrana (peroxidación lipídica), proteínas y ADN, iniciando reacciones en cadena destructivas. Los <strong>antioxidantes</strong> (Vitamina E, C) actúan donando un electrón o hidrógeno al radical, estabilizándolo. El antioxidante se convierte en un radical, pero es <strong>mucho más estable y menos reactivo</strong> (similar a la estabilidad por resonancia), rompiendo la cadena de propagación.</p>
+                </details>
+                <div class="problem-box"><strong>📋 Problema 2 — Envejecimiento y Cáncer:</strong> ¿Qué relación tiene la sustitución radicalica con el envejecimiento celular?</div>
+                <details class="solution"><summary>🔍 Ver solución</summary>
+                    <p>La acumulación de daño en el ADN por ataque de radicales libres (especies reactivas de oxígeno, ROS) genera mutaciones. Si estas mutaciones afectan oncogenes o genes supresores de tumores, puede iniciarse la carcinogénesis. Además, el daño acumulativo a proteínas y lípidos contribuye al fenotipo de envejecimiento.</p>
+                </details>
+            </div>
+
+            <div id="aplic-farma" class="tab-content">
+                <div class="pharma-box"><strong>Enfoque farmacológico:</strong> El metabolismo de xenobióticos y la toxicidad de fármacos.</div>
+                <div class="problem-box"><strong>📋 Problema 1 — Metabolismo por Citocromo P450:</strong> ¿Qué papel juegan los mecanismos radicalarios en el metabolismo hepático de fármacos?</div>
+                <details class="solution"><summary>🔍 Ver solución</summary>
+                    <p>El sistema del <strong>Citocromo P450</strong> en el hígado realiza reacciones de oxidación de fase I. Aunque el mecanismo exacto es complejo, involucra intermediarios de hierro-oxo de alta valencia que actúan de manera similar a radicales, abstractando átomos de hidrógeno de sustratos (alcanos/fármacos) para formar radicales de carbono que luego se convierten en alcoholes (hidroxilación).</p>
+                </details>
+                <div class="problem-box"><strong>📋 Problema 2 — Hepatotoxicidad por Halotano:</strong> ¿Por qué el anestésico halotano puede causar hepatitis grave?</div>
+                <details class="solution"><summary>🔍 Ver solución</summary>
+                    <p>En condiciones de hipoxia, el halotano sufre un <strong>metabolismo reductivo</strong> en el hígado que genera un <strong>radical libre de trifluorometilo (•CF₃)</strong>. Este radical se une covalentemente a proteínas hepáticas, creando neoantígenos que desencadenan una respuesta inmune devastadora (hepatitis por halotano).</p>
+                </details>
+            </div>
+
+            <div id="aplic-bioq" class="tab-content">
+                <div class="bio-box"><strong>Enfoque molecular:</strong> Reacciones en cadena en sistemas biológicos.</div>
+                <div class="problem-box"><strong>📋 Problema 1 — Peroxidación Lipídica:</strong> Describe las etapas de la peroxidación lipídica en membranas celulares.</div>
+                <details class="solution"><summary>🔍 Ver solución</summary>
+                    <p>Es análoga a la halogenación de alcanos:<br>
+                    <strong>Iniciación:</strong> Un radical (•OH) abstracta un H de un ácido graso poliinsaturado (LH), formando un radical lipídico (L•).<br>
+                    <strong>Propagación:</strong> L• reacciona con O₂ formando un radical peroxilo (LOO•), que a su vez abstracta un H de otro lípido, propagando la cadena.<br>
+                    <strong>Terminación:</strong> Dos radicales se acoplan o un antioxidante (Vit E) interrumpe la cadena.</p>
+                </details>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ MNEMOTECNIAS ============ -->
+<section id="mnemotecnias" class="section">
+    <div class="card">
+        <h2>🧠 Mnemotecnias y Reglas Mnemotécnicas</h2>
+        <div class="mnemonic-card"><div class="mnemonic-title">🏆 "BA321M" (Estabilidad de Radicales)</div><p><strong>B</strong>encilo > <strong>A</strong>lilo > <strong>3</strong>° > <strong>2</strong>° > <strong>1</strong>° > <strong>M</strong>etilo. (De mayor a menor estabilidad).</p></div>
+        <div class="mnemonic-card"><div class="mnemonic-title">🚂 "IPT" (Etapas del Mecanismo)</div><p><strong>I</strong>niciación (luz/calor, nacen radicales) → <strong>P</strong>ropagación (estado estacionario, cadena) → <strong>T</strong>erminación (acoplamiento, mueren radicales).</p></div>
+        <div class="mnemonic-card"><div class="mnemonic-title">🦁 "Fuerza Bruta, Cloro Común, Bromo Bueno, Iodo Inútil"</div><p><strong>F</strong>: Explosivo (fuerza bruta). <strong>Cl</strong>: Reactivo, poco selectivo (común). <strong>Br</strong>: Muy selectivo (bueno para síntesis específica). <strong>I</strong>: No reacciona (inútil).</p></div>
+        <div class="mnemonic-card"><div class="mnemonic-title">🧮 "Fórmula de Oro de la Abundancia"</div><p>Abundancia = (<strong>N° de H</strong> × <strong>Reactividad Relativa</strong>) / Total. ¡No basta con contar hidrógenos, hay que multiplicar por la estabilidad del radical!</p></div>
+        <div class="mnemonic-card"><div class="mnemonic-title">📐 "El Radical es Plano"</div><p>El carbono radicalario es <strong>sp²</strong> y <strong>plano</strong>. El electrón desapareado está en el orbital <strong>p</strong> (no vacío, como en carbocationes, sino con 1 electrón).</p></div>
+    </div>
+</section>
+
+<!-- ============ GLOSARIO ============ -->
+<section id="glosario" class="section">
+    <div class="card">
+        <h2>📖 Glosario Interactivo</h2>
+        <p style="margin-bottom:1.5rem;">Haz clic en cada término para ver su definición:</p>
+        <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Radical Libre</strong><div class="glossary-definition">Especie química con uno o más electrones desapareados, extremadamente reactiva y de baja selectividad.</div></div>
+        <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Ruptura Homolítica</strong><div class="glossary-definition">Ruptura de un enlace covalente donde cada átomo se queda con un electrón del par compartido, generando radicales.</div></div>
+        <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Estado Estacionario</strong><div class="glossary-definition">Fase de la reacción en cadena (propagación) donde la velocidad de formación de radicales iguala a su consumo, manteniendo su concentración constante y baja.</div></div>
+        <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Hiperconjugación</strong><div class="glossary-definition">Interacción estabilizadora entre los electrones de un enlace sigma (C-H o C-C) adyacente y el orbital p semi-lleno del radical.</div></div>
+        <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Reactividad Relativa</strong><div class="glossary-definition">Valor numérico que expresa la facilidad con la que se forma un radical en comparación con otro (ej. en cloración: 3°=5.0, 2°=3.8, 1°=1.0).</div></div>
+        <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Acoplamiento</strong><div class="glossary-definition">Reacción de terminación donde dos radicales se unen compartiendo sus electrones desapareados, formando un enlace covalente estable.</div></div>
+        <div class="glossary-term" onclick="toggleDefinition(this)"><strong>Peroxidación Lipídica</strong><div class="glossary-definition">Proceso de degradación oxidativa de lípidos por radicales libres, que compromete la integridad de las membranas celulares.</div></div>
+    </div>
+</section>
+
+<!-- ============ ERRORES ============ -->
+<section id="errores" class="section">
+    <div class="card">
+        <h2>⚠️ Errores Comunes de Estudiantes</h2>
+        <div class="error-card"><div class="error-title">❌ Error 1: Creer que el producto mayoritario depende solo del número de hidrógenos.</div><p><strong>Error:</strong> Pensar que como hay más H primarios, el producto primario siempre será el mayoritario.</p><div class="correction">✓ Corrección: Se debe multiplicar el N° de H por la <strong>reactividad relativa</strong>. En bromación, la altísima reactividad del H 3° o 2° supera ampliamente la ventaja numérica de los H 1°.</div></div>
+        <div class="error-card"><div class="error-title">❌ Error 2: Pensar que la halogenación con yodo es viable.</div><p><strong>Error:</strong> Proponer reacciones de yodación de alcanos.</p><div class="correction">✓ Corrección: La reacción con I₂ es <strong>endotérmica</strong> (ΔH = +13). No ocurre o lo hace muy lentamente. No es útil en síntesis.</div></div>
+        <div class="error-card"><div class="error-title">❌ Error 3: Confundir la selectividad del Cloro y el Bromo.</div><p><strong>Error:</strong> Asumir que el cloro es más selectivo porque es más reactivo.</p><div class="correction">✓ Corrección: Es al revés. El <strong>Bromo</strong> es mucho más selectivo (1600:82:1) que el Cloro (5:3.8:1). Mayor reactividad implica menor selectividad (Principio de Hammond).</div></div>
+        <div class="error-card"><div class="error-title">❌ Error 4: Olvidar que los radicales son planos (sp²).</div><p><strong>Error:</strong> Dibujar radicales con geometría piramidal como los carbaniones.</p><div class="correction">✓ Corrección: El carbono radicalario es <strong>sp² y plano</strong>. El orbital p contiene el electrón desapareado (no está vacío como en el carbocatión).</div></div>
+        <div class="error-card"><div class="error-title">❌ Error 5: Ignorar los productos de terminación.</div><p><strong>Error:</strong> Creer que solo se forma el producto de sustitución principal.</p><div class="correction">✓ Corrección: El acoplamiento de radicales (ej. CH₃• + CH₃• → Etano) es una prueba clásica de que el mecanismo es radicalario y genera productos colaterales.</div></div>
+        <div class="tip-box" style="margin-top:2rem;"><strong>💡 Consejo de estudio:</strong> Ante un problema de halogenación, pregúntate:
+            <ol>
+                <li>¿Qué tipo de hidrógenos tiene el alcano (1°, 2°, 3°) y cuántos hay de cada uno?</li>
+                <li>¿Es cloración (poco selectiva) o bromación (muy selectiva)?</li>
+                <li>Aplica la fórmula: (N° de H × Reactividad) para cada tipo y calcula el porcentaje.</li>
+            </ol>
+            Con eso dominas el Capítulo 14.</div>
+    </div>
+</section>
+
+<!-- ============ BIBLIOGRAFÍA ============ -->
+<section id="bibliografia" class="section">
+    <div class="card">
+        <h2>📚 Fuentes Bibliográficas Universitarias</h2>
+        <h3>Libros de Texto Principales</h3>
+        <div class="info-box"><strong>1. Wade, L.G. — "Química Orgánica"</strong><br>• <strong>Cap. 4:</strong> La estructura de los alcanos y la halogenación radicalaria.<br>• 9na edición, Pearson, 2017.</div>
+        <div class="info-box"><strong>2. McMurry, J. — "Química Orgánica"</strong><br>• <strong>Cap. 6:</strong> Reacciones de los alcanos: halogenación por radicales libres.<br>• 9na edición, Cengage Learning, 2016.</div>
+        <div class="info-box"><strong>3. Solomons, T.W.G. & Fryhle, C.B. — "Química Orgánica"</strong><br>• <strong>Cap. 10:</strong> Radicales libres: reacciones de alcanos y halogenuros de alquilo.<br>• 10ma edición, Wiley, 2011.</div>
+        <h3>Recursos Especializados</h3>
+        <div class="bio-box"><div><strong>4. Clayden, J. — "Organic Chemistry"</strong><br>• Capítulos sobre reacciones radicalarias y control cinético vs. termodinámico • 2da ed., Oxford, 2012.</div></div>
+        <div class="pharma-box"><div><strong>5. Patrick, G.L. — "An Introduction to Medicinal Chemistry"</strong><br>• Metabolismo oxidativo de fármacos y toxicidad por radicales libres • 6ta ed., Oxford, 2017.</div></div>
+    </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section id="quiz" class="section">
+    <div class="card">
+        <h2>🎯 Quiz de Autoevaluación</h2>
+        <p>Cada ciclo muestra <strong>10 preguntas al azar</strong> de una base de <strong>30</strong>. Cada vez que entras a esta pestaña o terminas un ciclo se sortean preguntas nuevas.</p>
+        <div class="quiz-stats">
+            <span class="quiz-stat" id="q-progress-text">Pregunta 1 de 10 • Aciertos: 0</span>
+            <span class="quiz-stat" id="q-history" style="background:#6c757d;"></span>
+        </div>
+        <div class="quiz-progress"><div class="quiz-progress-bar-bg"><div class="quiz-progress-bar" id="q-bar"></div></div></div>
+        <div id="quiz-container"></div>
+        <div id="quiz-result" class="calc-result" style="max-width:720px;margin:1rem auto;"></div>
+        <div style="text-align:center; margin-top:2rem;">
+            <button class="calc-button" onclick="startNewCycle()">🔄 Reiniciar Quiz (nuevo ciclo aleatorio)</button>
+        </div>
+    </div>
+</section>
+
+</div>
+
+<footer class="footer">
+    <p style="font-size:1.2rem; margin-bottom:1rem;">🎓 Universidad Peruana Cayetano Heredia</p>
+    <p>Facultad de Medicina • Departamento de Ciencias Básicas</p>
+    <p style="margin-top:1rem; font-style:italic;">"La química orgánica es el lenguaje de la vida"</p>
+    <p style="margin-top:2rem; font-size:0.9rem;">© 2026 - Material educativo para estudiantes de medicina</p>
+</footer>
+
+<script>
+    // ================= NAVEGACIÓN =================
+    function showSection(sectionId, btn) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(sectionId).classList.add('active');
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        if (sectionId === 'quiz') startNewCycle();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    function showTab(groupId, tabId, btn) {
+        const g = document.getElementById(groupId);
+        g.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        g.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+        if (btn) btn.classList.add('active');
+    }
+    function toggleMap(node){ node.parentElement.classList.toggle('open'); }
+    function toggleDefinition(el){
+        const d = el.querySelector('.glossary-definition');
+        d.classList.toggle('show');
+        el.style.background = d.classList.contains('show') ? '#fff9e6' : 'var(--white)';
+    }
+    
+    // ================= FLASHCARDS (30 items) =================
+    const flashcards = [
+     { q:'¿Qué es un radical libre?', a:'Especie química con electrones desapareados, extremadamente reactiva y de baja selectividad.' },
+     { q:'¿Cuál es la hibridación del carbono en un radical alquilo?', a:'sp².' },
+     { q:'¿Qué geometría presenta un radical alquilo?', a:'Plana trigonal.' },
+     { q:'¿Dónde se ubica el electrón desapareado en un radical alquilo?', a:'En el orbital p no hibridado (a diferencia del carbocatión, no está vacío).' },
+     { q:'Orden de estabilidad de radicales (de mayor a menor):', a:'Bencilo > Alilo > Terciario (3°) > Secundario (2°) > Primario (1°) > Metilo.' },
+     { q:'¿Por qué los radicales 3° son más estables que los 1°?', a:'Por hiperconjugación y efecto inductivo donador de los grupos alquilo adyacentes.' },
+     { q:'¿Cuáles son las 3 etapas del mecanismo de sustitución radicalica?', a:'Iniciación, Propagación y Terminación.' },
+     { q:'¿Qué ocurre en la etapa de Iniciación?', a:'Ruptura homolítica de un enlace (ej. Cl-Cl) por luz (hv) o calor (Δ) para generar los primeros radicales.' },
+     { q:'¿Qué caracteriza a la etapa de Propagación?', a:'Se consumen reactivos y se generan productos, pero la concentración de radicales permanece constante (estado estacionario).' },
+     { q:'¿Qué ocurre en la etapa de Terminación?', a:'Dos radicales se acoplan, destruyendo los radicales libres y terminando la cadena.' },
+     { q:'¿Cuál es el producto colateral de la terminación en la cloración del metano?', a:'Etano (CH₃-CH₃), por acoplamiento de dos radicales metilo.' },
+     { q:'¿Cuál es el halógeno más reactivo en la halogenación de alcanos?', a:'Flúor (F₂).' },
+     { q:'¿Por qué la fluoración no tiene interés práctico en síntesis?', a:'Es altamente exotérmica y explosiva.' },
+     { q:'¿Cuál es el halógeno menos reactivo?', a:'Yodo (I₂). La reacción es endotérmica y no ocurre o es muy lenta.' },
+     { q:'¿Qué halógeno es más selectivo, el cloro o el bromo?', a:'El bromo es mucho más selectivo que el cloro.' },
+     { q:'¿A qué temperatura suelen ocurrir las cloraciones?', a:'Normalmente a temperatura ambiente.' },
+     { q:'¿A qué temperatura pueden requerir las bromaciones?', a:'Hasta 100°C por encima de la temperatura ambiente.' },
+     { q:'¿Qué tipo de ruptura de enlace genera radicales libres?', a:'Ruptura homolítica.' },
+     { q:'¿La sustitución radicalica es un mecanismo iónico (SN1/SN2)?', a:'No, es un mecanismo radicalico (ni nucleofílico ni electrofílico).' },
+     { q:'En el propano, ¿cuántos hidrógenos primarios y secundarios hay?', a:'6 hidrógenos primarios y 2 hidrógenos secundarios.' },
+     { q:'¿Cuál es el producto principal en la cloración del propano?', a:'Cloruro de isopropilo (2-cloropropano).' },
+     { q:'¿Por qué el cloruro de isopropilo es el producto principal a pesar de haber menos H secundarios?', a:'Porque el radical secundario es más estable que el primario, y su mayor reactividad relativa compensa la menor cantidad de hidrógenos.' },
+     { q:'¿Cuál es la reactividad relativa para la cloración de H 3°, 2° y 1°?', a:'5.0 : 3.8 : 1.0' },
+     { q:'¿Cuál es la reactividad relativa para la bromación de H 3°, 2° y 1°?', a:'1600 : 82.0 : 1.0' },
+     { q:'¿Cómo se calcula la abundancia relativa de un producto?', a:'(N° de H del tipo × Reactividad relativa) / Suma de todos los valores × 100.' },
+     { q:'¿Qué es el "estado estacionario" en una reacción en cadena?', a:'Cuando la velocidad de formación de radicales es igual a su velocidad de consumo, manteniendo su concentración constante y baja.' },
+     { q:'¿Qué pasa si hay exceso de cloro en la cloración del metano?', a:'Se produce una mezcla de productos polihalogenados (CH₂Cl₂, CHCl₃, CCl₄).' },
+     { q:'¿El radical bencílico es más o menos estable que el terciario?', a:'Más estable, debido a la deslocalización del electrón por resonancia con el anillo aromático.' },
+     { q:'¿El radical alilo es más o menos estable que el secundario?', a:'Más estable, debido a la resonancia con el doble enlace adyacente.' },
+     { q:'¿Por qué el bromo es más selectivo que el cloro?', a:'Porque la etapa de abstractación de hidrógeno por el bromo es endotérmica (estado de transición tardío, similar al radical), por lo que la estabilidad del radical influye drásticamente en la velocidad.' }
+    ];
+    let fcIndex=0, fcFlipped=false, fcGood=0, fcBad=0, fcDone=false;
+    function fcUpdateStats(){
+        document.getElementById('fc-good').textContent=fcGood;
+        document.getElementById('fc-bad').textContent=fcBad;
+        document.getElementById('fc-left').textContent=Math.max(0,flashcards.length-fcIndex);
+        const tg=parseInt(localStorage.getItem('fc14TotalGood')||'0',10), tb=parseInt(localStorage.getItem('fc14TotalBad')||'0',10);
+        document.getElementById('fc-hist').textContent=tg+' ✓ / '+tb+' ✗';
+        document.getElementById('fc-bar').style.width=(fcIndex/flashcards.length*100)+'%';
+    }
+    function fcRenderCard(){
+        document.getElementById('fc-card').classList.remove('flipped'); fcFlipped=false;
+        document.getElementById('fc-question').textContent=flashcards[fcIndex].q;
+        document.getElementById('fc-answer').textContent=flashcards[fcIndex].a;
+        document.getElementById('btn-fc-good').disabled=true; document.getElementById('btn-fc-bad').disabled=true;
+        fcUpdateStats();
+    }
+    function flipCard(){
+        if(fcDone) return;
+        const c=document.getElementById('fc-card'); c.classList.toggle('flipped');
+        fcFlipped=c.classList.contains('flipped');
+        document.getElementById('btn-fc-good').disabled=!fcFlipped;
+        document.getElementById('btn-fc-bad').disabled=!fcFlipped;
+    }
+    function gradeCard(ok){
+        if(!fcFlipped||fcDone) return;
+        if(ok){ fcGood++; localStorage.setItem('fc14TotalGood',String(parseInt(localStorage.getItem('fc14TotalGood')||'0',10)+1)); }
+        else { fcBad++; localStorage.setItem('fc14TotalBad',String(parseInt(localStorage.getItem('fc14TotalBad')||'0',10)+1)); }
+        fcIndex++;
+        if(fcIndex<flashcards.length) { fcRenderCard(); } else { fcFinish(); }
+    }
+    function fcFinish(){
+        fcDone=true;
+        document.getElementById('fc-scene').style.display='none';
+        document.getElementById('fc-controls').style.display='none';
+        const pct=Math.round(fcGood/(fcGood+fcBad)*100);
+        const msg=pct>=80?' ¡Excelente! Dominas el capítulo 14.':(pct>=60?'💪 ¡Bien! Repasa las que fallaste.':'📚 Repasa Conceptos, Mapa y Errores Comunes.');
+        const s=document.getElementById('fc-summary');
+        s.innerHTML='<strong>📊 Resumen:</strong> ✅ '+fcGood+' • ❌ '+fcBad+' • Precisión <strong>'+pct+'%</strong><br>'+msg;
+        s.classList.add('show'); fcUpdateStats();
+    }
+    function resetFlashcards(){
+        fcIndex=0; fcGood=0; fcBad=0; fcDone=false;
+        document.getElementById('fc-scene').style.display='block';
+        document.getElementById('fc-controls').style.display='flex';
+        document.getElementById('fc-summary').classList.remove('show');
+        fcRenderCard();
+    }
+    function borrarHistorial(){ localStorage.removeItem('fc14TotalGood'); localStorage.removeItem('fc14TotalBad'); fcUpdateStats(); }
+    
+    // ================= HERRAMIENTAS =================
+    function calcularAbundancia(){
+        const tipo = document.getElementById('calc-tipo-hal').value;
+        const h1 = parseInt(document.getElementById('calc-h1').value) || 0;
+        const h2 = parseInt(document.getElementById('calc-h2').value) || 0;
+        const h3 = parseInt(document.getElementById('calc-h3').value) || 0;
+        
+        let r1=1.0, r2=3.8, r3=5.0;
+        if(tipo === 'bromo') { r1=1.0; r2=82.0; r3=1600; }
+        
+        const v1 = h1 * r1;
+        const v2 = h2 * r2;
+        const v3 = h3 * r3;
+        const total = v1 + v2 + v3;
+        
+        if(total === 0) {
+            alert("Ingresa al menos un número de hidrógenos mayor a 0.");
+            return;
+        }
+        
+        const p1 = ((v1/total)*100).toFixed(1);
+        const p2 = ((v2/total)*100).toFixed(1);
+        const p3 = ((v3/total)*100).toFixed(1);
+        
+        let html = `<strong>Resultados para ${tipo === 'cloro' ? 'Cloración' : 'Bromación'}:</strong><br><br>`;
+        if(h1 > 0) html += `• Producto Primario (1°): <strong>${p1}%</strong> (Valor: ${h1} H × ${r1} = ${v1})<br>`;
+        if(h2 > 0) html += `• Producto Secundario (2°): <strong>${p2}%</strong> (Valor: ${h2} H × ${r2} = ${v2})<br>`;
+        if(h3 > 0) html += `• Producto Terciario (3°): <strong>${p3}%</strong> (Valor: ${h3} H × ${r3} = ${v3})<br>`;
+        html += `<br><em>Suma total de valores: ${total}</em>`;
+        
+        const r = document.getElementById('abundancia-resultado');
+        r.innerHTML = html;
+        r.classList.add('show');
+    }
+
+    const halogenoData = [
+     { h:'F', t:'Flúor (F₂)', r:'Altamente exotérmica (-103 kcal/mol). Explosiva, sin control ni interés práctico en síntesis.' },
+     { h:'Cl', t:'Cloro (Cl₂)', r:'Exotérmica (-25 kcal/mol). Muy reactivo, pero poco selectivo. Ocurre a temperatura ambiente.' },
+     { h:'Br', t:'Bromo (Br₂)', r:'Ligeramente exotérmica (-7 kcal/mol). Menos reactivo, pero ALTAMENTE selectivo. Puede requerir calor (100°C).' },
+     { h:'I', t:'Yodo (I₂)', r:'Endotérmica (+13 kcal/mol). No ocurre o lo hace muy lentamente. No es viable.' }
+    ];
+    function clasificarHalogeno(){
+        const d=halogenoData.find(x => x.h === document.getElementById('halogeno-select').value);
+        const r=document.getElementById('halogeno-resultado');
+        r.innerHTML='<strong>'+d.t+'</strong><br>Evaluación: <span style="color:#e94560;font-weight:bold;">'+d.r+'</span>';
+        r.classList.add('show');
+    }
+    
+    // ================= QUIZ (base 30, muestra 10 al azar) =================
+    const quizBank = [
+     { question:'¿Qué tipo de mecanismo presenta la reacción de un alcano con cloro?', options:['Sustitución Nucleofílica (SN1)','Sustitución Electrofílica','Mecanismo Radicalico','Adición Electrofílica'], correct:2, explanation:'La halogenación de alcanos ocurre mediante un mecanismo de sustitución por radicales libres, no iónico.' },
+     { question:'¿Qué es un radical libre?', options:['Una especie con carga positiva','Una especie con electrones desapareados','Una especie con octeto completo','Un nucleófilo fuerte'], correct:1, explanation:'Un radical libre es una especie química con uno o más electrones desapareados, lo que lo hace extremadamente reactivo.' },
+     { question:'¿Cuál es la hibridación del carbono en un radical alquilo?', options:['sp','sp²','sp³','sp³d'], correct:1, explanation:'El carbono radicalario tiene hibridación sp² y geometría plana trigonal.' },
+     { question:'¿Dónde se encuentra el electrón desapareado en un radical alquilo?', options:['En un orbital sp²','En un orbital p no hibridado','En un orbital s','Compartido en un enlace sigma'], correct:1, explanation:'El electrón desapareado reside en el orbital p no hibridado, perpendicular al plano de los enlaces sigma.' },
+     { question:'¿Cuál es el orden correcto de estabilidad de radicales?', options:['Metilo > 1° > 2° > 3°','3° > 2° > 1° > Metilo','Bencilo > Alilo > 3° > 2° > 1° > Metilo','1° > 3° > Alilo > Bencilo'], correct:2, explanation:'El orden de estabilidad es: Bencilo > Alilo > 3° > 2° > 1° > Metilo, debido a resonancia e hiperconjugación.' },
+     { question:'¿Qué etapa del mecanismo genera los primeros radicales?', options:['Propagación','Terminación','Iniciación','Estado estacionario'], correct:2, explanation:'La iniciación es la etapa donde la ruptura homolítica (por luz o calor) genera los primeros radicales.' },
+     { question:'¿Qué tipo de ruptura de enlace ocurre en la iniciación?', options:['Heterolítica','Homolítica','Iónica','Covalente coordinada'], correct:1, explanation:'La ruptura homolítica divide el par de electrones del enlace equitativamente, un electrón para cada átomo.' },
+     { question:'¿Qué caracteriza a la etapa de propagación?', options:['Aumento exponencial de radicales','Concentración de radicales constante (estado estacionario)','Desaparición total de radicales','Requiere luz UV constante'], correct:1, explanation:'En la propagación, se consume un radical y se genera otro, manteniendo la concentración de radicales baja y constante.' },
+     { question:'¿Qué ocurre en la etapa de terminación?', options:['Ruptura de enlaces C-H','Acoplamiento de dos radicales','Formación de iones','Absorción de luz'], correct:1, explanation:'La terminación ocurre cuando dos radicales chocan y se acoplan, destruyendo los radicales libres y deteniendo la cadena.' },
+     { question:'¿Qué producto colateral se forma en la terminación de la cloración del metano?', options:['Propano','Etano','Butano','Eteno'], correct:1, explanation:'El acoplamiento de dos radicales metilo (CH₃• + CH₃•) forma etano (CH₃-CH₃).' },
+     { question:'¿Cuál es el halógeno más reactivo en la halogenación de alcanos?', options:['Yodo','Bromo','Cloro','Flúor'], correct:3, explanation:'El flúor es el más reactivo, pero su reacción es tan exotérmica que es explosiva y no tiene interés práctico.' },
+     { question:'¿Por qué la yodación de alcanos no es viable?', options:['Es demasiado explosiva','Es endotérmica y no ocurre o es muy lenta','El yodo es un gas tóxico','Forma enlaces demasiado fuertes'], correct:1, explanation:'La reacción con I₂ es endotérmica (ΔH = +13 kcal/mol), por lo que no es espontánea ni práctica.' },
+     { question:'¿Qué halógeno es más selectivo?', options:['Cloro','Bromo','Flúor','Yodo'], correct:1, explanation:'El bromo es mucho más selectivo que el cloro, favoreciendo abrumadoramente la formación del radical más estable.' },
+     { question:'¿A qué temperatura ocurren normalmente las cloraciones?', options:['A -78°C','A temperatura ambiente','A 100°C','A 500°C'], correct:1, explanation:'Las cloraciones son lo suficientemente exotérmicas y reactivas como para ocurrir a temperatura ambiente.' },
+     { question:'En el propano, ¿cuántos hidrógenos primarios y secundarios hay?', options:['8 primarios, 0 secundarios','6 primarios, 2 secundarios','2 primarios, 6 secundarios','4 primarios, 4 secundarios'], correct:1, explanation:'El propano (CH₃-CH₂-CH₃) tiene 6 hidrógenos en los carbonos primarios (extremos) y 2 en el carbono secundario (central).' },
+     { question:'¿Cuál es el producto principal en la cloración del propano?', options:['1-cloropropano','2-cloropropano (cloruro de isopropilo)','1,2-dicloropropano','Propano no reacciona'], correct:1, explanation:'Aunque hay menos H secundarios, el radical secundario es más estable, haciendo que el 2-cloropropano sea el producto mayoritario.' },
+     { question:'¿Cuál es la reactividad relativa del H terciario en cloración?', options:['1.0','3.8','5.0','1600'], correct:2, explanation:'Para la cloración, las reactividades relativas son aproximadamente: 3° (5.0), 2° (3.8), 1° (1.0).' },
+     { question:'¿Cuál es la reactividad relativa del H terciario en bromación?', options:['1.0','82.0','1600','5.0'], correct:2, explanation:'El bromo es altamente selectivo: 3° (1600), 2° (82.0), 1° (1.0).' },
+     { question:'¿Cómo se calcula la abundancia relativa de un producto?', options:['Solo contando el número de hidrógenos','(N° de H × Reactividad relativa) / Total','(Reactividad relativa) / N° de H','Al azar'], correct:1, explanation:'La abundancia depende tanto de la probabilidad estadística (N° de H) como de la facilidad de formación (reactividad relativa).' },
+     { question:'Si hay exceso de cloro en la cloración del metano, ¿qué sucede?', options:['La reacción se detiene','Se obtiene solo clorometano','Se produce una mezcla de productos polihalogenados','Se forma etano exclusivamente'], correct:2, explanation:'El clorometano formado puede seguir reaccionando con cloro, produciendo CH₂Cl₂, CHCl₃ y CCl₄.' },
+     { question:'¿El radical bencílico es más estable que el terciario?', options:['No, el terciario es siempre el más estable','Sí, por resonancia con el anillo aromático','Son igualmente estables','Depende de la temperatura'], correct:1, explanation:'La deslocalización del electrón desapareado a través del sistema pi del anillo aromático otorga una estabilidad excepcional al radical bencílico.' },
+     { question:'¿Qué principio explica que un reactivo más reactivo sea menos selectivo?', options:['Principio de Le Chatelier','Principio de Hammond','Regla de Markovnikov','Regla de Zaitsev'], correct:1, explanation:'El Principio de Hammond establece que en una reacción exotérmica (como la cloración), el estado de transición se parece a los reactivos, por lo que la estabilidad del radical influye menos (menor selectividad).' },
+     { question:'¿Qué tipo de radiación se usa comúnmente para la iniciación?', options:['Infrarroja','Ultravioleta (UV)','Rayos X','Microondas'], correct:1, explanation:'La luz ultravioleta (hv) proporciona la energía necesaria para romper homolíticamente el enlace del halógeno.' },
+     { question:'¿Cuál de los siguientes NO es un paso de propagación en la cloración del metano?', options:['Cl• + CH₄ → HCl + CH₃•','CH₃• + Cl₂ → CH₃Cl + Cl•','Cl• + Cl• → Cl₂','Ninguno de los anteriores'], correct:2, explanation:'Cl• + Cl• → Cl₂ es un paso de terminación, ya que dos radicales se combinan y desaparecen.' },
+     { question:'¿Por qué los antioxidantes son efectivos contra el daño radicalario?', options:['Porque son radicales muy inestables','Porque donan un electrón/H y se convierten en radicales estables por resonancia','Porque rompen enlaces C-C','Porque aumentan la temperatura'], correct:1, explanation:'Los antioxidantes (como la Vitamina E) neutralizan radicales dañinos y el radical resultante en el antioxidante es estable (ej. por resonancia en el anillo aromático), deteniendo la cadena.' },
+     { question:'¿Qué enzima hepática utiliza mecanismos que involucran intermediarios radicalarios para metabolizar fármacos?', options:['Amilasa','Citocromo P450','Pepsina','Lactasa'], correct:1, explanation:'El sistema del Citocromo P450 realiza oxidaciones de fase I mediante intermediarios de alta valencia que actúan de manera similar a radicales.' },
+     { question:'¿Qué es la peroxidación lipídica?', options:['Síntesis de grasas','Degradación oxidativa de lípidos de membrana por radicales libres','Conversión de lípidos en carbohidratos','Almacenamiento de grasa'], correct:1, explanation:'Es un proceso de daño en cadena donde los radicales libres roban hidrógenos de los ácidos grasos poliinsaturados, comprometiendo la membrana celular.' },
+     { question:'¿Cuál es la principal diferencia entre un carbocatión y un radical de carbono?', options:['El carbocatión es sp² y el radical es sp³','El orbital p del carbocatión está vacío, el del radical tiene 1 electrón','El radical tiene carga positiva','No hay diferencia estructural'], correct:1, explanation:'Ambos son sp² y planos, pero el carbocatión tiene el orbital p vacío (deficiente en electrones, 6 e- de valencia), mientras que el radical tiene un electrón en ese orbital p (7 e- de valencia).' },
+     { question:'¿Qué producto se espera mayoritariamente en la bromación del 2-metilbutano?', options:['1-bromo-2-metilbutano','2-bromo-2-metilbutano (terciario)','2-bromo-3-metilbutano','Una mezcla equimolar de todos'], correct:1, explanation:'El bromo es tan selectivo (1600 para 3°) que, a pesar de haber solo 1 H terciario, el producto terciario (2-bromo-2-metilbutano) será abrumadoramente mayoritario.' },
+     { question:'¿La reacción de un alcano con bromo a temperatura ambiente y sin luz ocurre?', options:['Sí, rápidamente','No, requiere luz o calor para la iniciación','Sí, pero solo con yodo','Depende del color del alcano'], correct:1, explanation:'Sin una fuente de energía (luz UV o calor) para la ruptura homolítica inicial del Br₂, la reacción no se inicia.' }
+    ];
+    let quizSet=[], qIdx=0, qScore=0, qAnswered=false, cycleDone=false, quizLastSet=[];
+    
+    function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); const t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+    function overlapCount(sel, old){ const s=new Set(old.map(q=>q.question)); return sel.filter(q=>s.has(q.question)).length; }
+    
+    function startNewCycle(){
+        let sel, tries=0;
+        do { sel=shuffle(quizBank.slice()).slice(0,10); tries++; }
+        while (quizLastSet.length && overlapCount(sel, quizLastSet) > 4 && tries < 30);
+        quizLastSet=sel;
+        quizSet=sel;
+        qIdx=0; qScore=0; qAnswered=false; cycleDone=false;
+        document.getElementById('quiz-result').style.display='none';
+        document.getElementById('quiz-result').classList.remove('show');
+        renderQuestion(); updateQuizHistory();
+    }
+    function renderQuestion(){
+        const q=quizSet[qIdx];
+        document.getElementById('q-progress-text').textContent='Pregunta '+(qIdx+1)+' de 10 • Aciertos: '+qScore;
+        document.getElementById('q-bar').style.width=(qIdx/10*100)+'%';
+        let html='<div class="quiz-container"><div class="quiz-question">'+(qIdx+1)+'. '+q.question+'</div><div class="quiz-options">';
+        q.options.forEach(function(o,i){ html+='<button class="quiz-option" onclick="checkQuiz('+i+', this)">'+o+'</button>'; });
+        html+='</div><div id="quiz-feedback" style="display:none;margin-top:1rem;padding:1rem;border-radius:8px;color:#2c3e50;"></div>';
+        html+='<div style="text-align:center;margin-top:1.2rem;"><button id="btn-next" class="calc-button" style="display:none;" onclick="nextQuestion()">'+(qIdx===9?'📊 Ver resultados':'➡️ Siguiente pregunta')+'</button></div></div>';
+        document.getElementById('quiz-container').innerHTML=html;
+        qAnswered=false;
+    }
+    function checkQuiz(i,btn){
+        if(qAnswered) return; qAnswered=true;
+        const q=quizSet[qIdx];
+        const opts=btn.parentElement.querySelectorAll('.quiz-option');
+        opts.forEach(function(o){ o.disabled=true; });
+        const fb=document.getElementById('quiz-feedback');
+        if(i===q.correct){ btn.classList.add('correct'); qScore++;
+            fb.innerHTML='<span style="color:#2e7d32;font-weight:bold;">✅ ¡Correcto!</span><br>'+q.explanation;
+            fb.style.background='#e8f5e9';
+        } else { btn.classList.add('incorrect'); opts[q.correct].classList.add('correct');
+            fb.innerHTML='<span style="color:#c62828;font-weight:bold;">❌ Incorrecto.</span><br>'+q.explanation;
+            fb.style.background='#ffebee';
+        }
+        fb.style.display='block';
+        document.getElementById('q-progress-text').textContent='Pregunta '+(qIdx+1)+' de 10 • Aciertos: '+qScore;
+        document.getElementById('btn-next').style.display='inline-block';
+    }
+    function nextQuestion(){ if(qIdx<9){ qIdx++; renderQuestion(); } else { finishCycle(); } }
+    function finishCycle(){
+        cycleDone=true;
+        document.getElementById('q-bar').style.width='100%';
+        document.getElementById('quiz-container').innerHTML='';
+        const pct=Math.round(qScore*10);
+        let cycles=parseInt(localStorage.getItem('q14_cycles')||'0',10)+1;
+        const best=Math.max(parseInt(localStorage.getItem('q14_best')||'0',10),pct);
+        const totC=parseInt(localStorage.getItem('q14_totC')||'0',10)+qScore;
+        const totQ=parseInt(localStorage.getItem('q14_totQ')||'0',10)+10;
+        localStorage.setItem('q14_cycles',String(cycles)); localStorage.setItem('q14_best',String(best));
+        localStorage.setItem('q14_totC',String(totC)); localStorage.setItem('q14_totQ',String(totQ));
+        const msg=pct>=80?'🏆 ¡Excelente! Dominas el Capítulo 14.':(pct>=60?'💪 ¡Bien! Repasa los temas fallados en Conceptos y Errores Comunes.':'📚 Necesitas repasar: usa Mapa, Flashcards y Aplicaciones antes del próximo ciclo.');
+        const r=document.getElementById('quiz-result');
+        r.innerHTML='<strong>📊 Resultados del ciclo:</strong> '+qScore+'/10 correctas • <strong style="color:#e94560;">'+pct+'%</strong><br>'+msg+'<br><br>🔄 Pulsa "Reiniciar Quiz" o vuelve a entrar al Quiz para un <strong>nuevo ciclo con preguntas aleatorias</strong>.';
+        r.style.display='block'; r.classList.add('show');
+        document.getElementById('q-progress-text').textContent='Ciclo completado • Aciertos: '+qScore+'/10';
+        updateQuizHistory();
+    }
+    function updateQuizHistory(){
+        const cycles=parseInt(localStorage.getItem('q14_cycles')||'0',10);
+        const best=parseInt(localStorage.getItem('q14_best')||'0',10);
+        const totC=parseInt(localStorage.getItem('q14_totC')||'0',10);
+        const totQ=parseInt(localStorage.getItem('q14_totQ')||'0',10);
+        document.getElementById('q-history').innerHTML='📈 Ciclos: <strong>'+cycles+'</strong> | Mejor: <strong>'+best+'%</strong> | Promedio histórico: <strong>'+(totQ?Math.round(totC/totQ*100):0)+'%</strong>';
+    }
+    
+    // ================= INICIALIZACIÓN =================
+    document.addEventListener('DOMContentLoaded', function(){
+        startNewCycle();
+        fcRenderCard();
+    });
+
+    // ============================================================
+    //  AMPLIAR IMÁGENES AL HACER CLIC
+    // ============================================================
+    document.addEventListener('DOMContentLoaded', function() {
+        const imagenes = document.querySelectorAll('.img-container img, .molecule-img');
+        imagenes.forEach(img => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', function(e) {
+                window.open(this.src, '_blank');
+            });
+        });
+    });
+</script>
+</body>
+</html>
